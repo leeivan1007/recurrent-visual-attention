@@ -442,17 +442,17 @@ class Trainer:
         for i, (x, y) in enumerate(self.test_loader):
             x, y = x.to(self.device), y.to(self.device)
 
-            ########### shift test ###########
-            batsh_s, channels, width, height = x.shape
-            shift_unit = 1
-            s_u = shift_unit * 2
-            copy_tensor = torch.zeros((batsh_s, channels, width+s_u, height+s_u)).to('cuda')
-            init_pos = 1
-            ver_pos = shift_unit + random.randint(-1, 1)
-            her_pos = shift_unit + random.randint(-1, 1)
-            copy_tensor[:, :, ver_pos: ver_pos+width, her_pos: her_pos+height] = x
-            x = copy_tensor[:, :, init_pos: init_pos+width, init_pos: init_pos+height]
-            ########### shift test ###########
+            # ########### shift test ###########
+            # batsh_s, channels, width, height = x.shape
+            # shift_unit = 1
+            # s_u = shift_unit * 2
+            # copy_tensor = torch.zeros((batsh_s, channels, width+s_u, height+s_u)).to('cuda')
+            # init_pos = 1
+            # ver_pos = shift_unit + random.randint(-1, 1)
+            # her_pos = shift_unit + random.randint(-1, 1)
+            # copy_tensor[:, :, ver_pos: ver_pos+width, her_pos: her_pos+height] = x
+            # x = copy_tensor[:, :, init_pos: init_pos+width, init_pos: init_pos+height]
+            # ########### shift test ###########
 
             # duplicate M times
             x = x.repeat(self.M, 1, 1, 1)

@@ -7,6 +7,7 @@ from utils import set_seed
 from trainer import Trainer
 from config import get_config
 import numpy as np
+import time
 
 
 def main(config):
@@ -14,7 +15,8 @@ def main(config):
 
     # ensure reproducibility
     if config.random_seed == False:
-        config.random_seed = np.random.randint(np.iinfo(np.int32).max // 2)
+        config.random_seed = int(time.time())
+        time.sleep(1)
 
     set_seed(config.random_seed)
     kwargs = {}
